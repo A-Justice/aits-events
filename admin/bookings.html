@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bookings - AITS Events Admin</title>
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body class="wp-admin wp-core-ui">
+    <div id="wpadminbar" class="nojq">
+        <div class="quicklinks" id="wp-toolbar" role="navigation">
+            <ul id="wp-admin-bar-root-default" class="ab-top-menu">
+                <li id="wp-admin-bar-site-name" class="menupop">
+                    <a class="ab-item" href="../index.html" target="_blank">Visit Site</a>
+                </li>
+                <li id="wp-admin-bar-my-account" class="menupop">
+                    <a class="ab-item" href="#">
+                        <span class="display-name">Admin</span>
+                    </a>
+                    <ul class="ab-sub-wrapper">
+                        <li><a href="#" id="logout-link">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="wpcontent">
+        <div id="adminmenuback"></div>
+        <div id="adminmenuwrap">
+            <ul id="adminmenu">
+                <li class="wp-menu-separator"><div class="separator"></div></li>
+                <li class="wp-has-submenu menu-top menu-icon-dashboard">
+                    <a href="dashboard.html" class="wp-menu-image dashicons-before dashicons-dashboard">
+                        <span class="wp-menu-name">Dashboard</span>
+                    </a>
+                </li>
+                <li class="wp-has-submenu menu-top menu-icon-events">
+                    <a href="events.html" class="wp-menu-image dashicons-before dashicons-calendar-alt">
+                        <span class="wp-menu-name">Events</span>
+                    </a>
+                </li>
+                <li class="wp-has-submenu wp-has-current-submenu wp-menu-open menu-top menu-icon-bookings">
+                    <a href="bookings.html" class="wp-menu-image dashicons-before dashicons-tickets-alt">
+                        <span class="wp-menu-name">Bookings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="wpbody-content">
+            <div class="wrap">
+                <h1 class="wp-heading-inline">Bookings</h1>
+                <hr class="wp-header-end">
+                
+                <table class="wp-list-table widefat fixed striped table-view-list">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="column-name">Name</th>
+                            <th scope="col" class="column-email">Email</th>
+                            <th scope="col" class="column-phone">Phone</th>
+                            <th scope="col" class="column-event">Event</th>
+                            <th scope="col" class="column-tickets">Tickets</th>
+                            <th scope="col" class="column-date">Date</th>
+                            <th scope="col" class="column-status">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-tbody">
+                        <tr><td colspan="7">Loading bookings...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/bookings.js"></script>
+</body>
+</html>
+

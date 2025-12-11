@@ -1,0 +1,382 @@
+/* WordPress Admin Style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #23282d;
+    background: #f0f0f1;
+}
+
+/* Login Page */
+body.login {
+    background: #f0f0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#login {
+    width: 320px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
+}
+
+#login h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#login h1 a {
+    color: #2271b1;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#login form {
+    margin-top: 20px;
+}
+
+#login form p {
+    margin-bottom: 15px;
+}
+
+#login form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+#login form .input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 2;
+    color: #2c3338;
+    background-color: #fff;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+}
+
+#login form .input:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: 2px solid transparent;
+}
+
+#login .forgetmenot {
+    margin-bottom: 15px;
+}
+
+#login .forgetmenot label {
+    display: inline;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+#login .submit {
+    margin-top: 20px;
+}
+
+.button, .button-primary {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 2.15384615;
+    min-height: 30px;
+    margin: 0;
+    padding: 0 10px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.button-primary {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+    text-shadow: none;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.button-primary:hover {
+    background: #135e96;
+    border-color: #135e96;
+}
+
+.button-large {
+    padding: 8px 16px;
+    font-size: 14px;
+    line-height: 2.15384615;
+}
+
+.error-message {
+    background: #fcf0f1;
+    border-left: 4px solid #d63638;
+    padding: 12px;
+    margin-top: 15px;
+    color: #d63638;
+}
+
+/* Admin Dashboard */
+.wrap {
+    margin: 0 20px 0 2px;
+}
+
+#wpcontent {
+    margin-left: 160px;
+    padding: 0;
+}
+
+#wpbody-content {
+    padding: 20px;
+}
+
+/* Admin Menu */
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu {
+    position: fixed;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    width: 160px;
+    background: #1d2327;
+    z-index: 9990;
+}
+
+#adminmenu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#adminmenu li {
+    margin: 0;
+    padding: 0;
+}
+
+#adminmenu a {
+    display: block;
+    padding: 8px 12px;
+    color: #a7aaad;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+}
+
+#adminmenu a:hover {
+    color: #00a0d2;
+    background: #2c3338;
+}
+
+#adminmenu .wp-menu-image {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 0 8px 0 0;
+    text-align: center;
+}
+
+#adminmenu .wp-menu-name {
+    padding-left: 28px;
+}
+
+#adminmenu .current,
+#adminmenu .wp-has-current-submenu {
+    background: #2271b1;
+}
+
+#adminmenu .current a,
+#adminmenu .wp-has-current-submenu a {
+    color: #fff;
+    border-left-color: #72aee6;
+}
+
+/* Admin Header */
+#wpadminbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: #23282d;
+    z-index: 99999;
+    color: #a7aaad;
+}
+
+#wpadminbar .ab-item {
+    padding: 0 10px;
+    line-height: 32px;
+    color: #a7aaad;
+    text-decoration: none;
+}
+
+#wpadminbar .ab-item:hover {
+    color: #00a0d2;
+}
+
+/* Admin Content */
+.wp-heading-inline {
+    font-size: 23px;
+    font-weight: 400;
+    padding: 9px 0 4px 0;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.page-title-action {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 4px 8px;
+    background: #2271b1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.page-title-action:hover {
+    background: #135e96;
+    color: #fff;
+}
+
+/* Tables */
+.wp-list-table {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+
+.wp-list-table thead th {
+    background: #f6f7f7;
+    border-bottom: 1px solid #c3c4c7;
+    padding: 10px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.wp-list-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.wp-list-table tbody tr:hover {
+    background: #f6f7f7;
+}
+
+/* Forms */
+.form-table {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+
+.form-table th {
+    width: 200px;
+    padding: 20px;
+    background: #f6f7f7;
+    border-bottom: 1px solid #c3c4c7;
+    text-align: left;
+    font-weight: 600;
+}
+
+.form-table td {
+    padding: 20px;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.form-table input[type="text"],
+.form-table input[type="email"],
+.form-table input[type="date"],
+.form-table input[type="time"],
+.form-table input[type="number"],
+.form-table textarea,
+.form-table select {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-table textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Buttons */
+.button-secondary {
+    background: #f6f7f7;
+    border-color: #dcdcde;
+    color: #2c3338;
+}
+
+.button-secondary:hover {
+    background: #f0f0f1;
+    border-color: #8c8f94;
+}
+
+.button-link-delete {
+    color: #b32d2e;
+}
+
+.button-link-delete:hover {
+    color: #d63638;
+}
+
+/* Notices */
+.notice {
+    background: #fff;
+    border-left: 4px solid #72aee6;
+    padding: 12px;
+    margin: 15px 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.notice-success {
+    border-left-color: #00a32a;
+}
+
+.notice-error {
+    border-left-color: #d63638;
+}
+
+.notice-warning {
+    border-left-color: #dba617;
+}
+
+/* Loading */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2271b1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+

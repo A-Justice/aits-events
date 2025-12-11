@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - AITS Events Admin</title>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="wp-admin wp-core-ui">
+    <div id="wpadminbar" class="nojq">
+        <div class="quicklinks" id="wp-toolbar" role="navigation">
+            <ul id="wp-admin-bar-root-default" class="ab-top-menu">
+                <li id="wp-admin-bar-site-name" class="menupop">
+                    <a class="ab-item" href="../index.html" target="_blank">Visit Site</a>
+                </li>
+                <li id="wp-admin-bar-my-account" class="menupop">
+                    <a class="ab-item" href="#" id="user-profile-link">
+                        <span class="display-name">Admin</span>
+                    </a>
+                    <ul class="ab-sub-wrapper">
+                        <li><a href="#" id="logout-link">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="wpcontent">
+        <div id="adminmenuback"></div>
+        <div id="adminmenuwrap">
+            <ul id="adminmenu">
+                <li class="wp-menu-separator"><div class="separator"></div></li>
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-dashboard">
+                    <a href="dashboard.html" class="wp-menu-image dashicons-before dashicons-dashboard">
+                        <span class="wp-menu-name">Dashboard</span>
+                    </a>
+                </li>
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-events">
+                    <a href="events.html" class="wp-menu-image dashicons-before dashicons-calendar-alt">
+                        <span class="wp-menu-name">Events</span>
+                    </a>
+                    <ul class="wp-submenu wp-submenu-wrap">
+                        <li><a href="events.html">All Events</a></li>
+                        <li><a href="events.html?action=add">Add New</a></li>
+                    </ul>
+                </li>
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-bookings">
+                    <a href="bookings.html" class="wp-menu-image dashicons-before dashicons-tickets-alt">
+                        <span class="wp-menu-name">Bookings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="wpbody-content">
+            <div class="wrap">
+                <h1 class="wp-heading-inline">Dashboard</h1>
+                
+                <div class="dashboard-widgets-wrap">
+                    <div id="dashboard-widgets" class="metabox-holder">
+                        <div class="postbox-container" style="width: 50%;">
+                            <div class="meta-box-sortables">
+                                <div class="postbox">
+                                    <h2 class="hndle"><span>At a Glance</span></h2>
+                                    <div class="inside">
+                                        <div class="main">
+                                            <ul>
+                                                <li class="post-count">
+                                                    <a href="events.html">
+                                                        <span class="count" id="events-count">0</span>
+                                                        <span>Events</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-count">
+                                                    <a href="bookings.html">
+                                                        <span class="count" id="bookings-count">0</span>
+                                                        <span>Bookings</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="postbox-container" style="width: 50%;">
+                            <div class="meta-box-sortables">
+                                <div class="postbox">
+                                    <h2 class="hndle"><span>Recent Events</span></h2>
+                                    <div class="inside">
+                                        <div class="main" id="recent-events">
+                                            <p>Loading...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,37 @@
+/* Events Management Styles */
+.row-actions {
+    visibility: hidden;
+}
+
+tr:hover .row-actions {
+    visibility: visible;
+}
+
+.row-actions span {
+    color: #2271b1;
+}
+
+.row-actions a {
+    text-decoration: none;
+}
+
+.row-actions .trash a {
+    color: #b32d2e;
+}
+
+.row-actions .trash a:hover {
+    color: #d63638;
+}
+
+.status-pending {
+    color: #dba617;
+}
+
+.status-confirmed {
+    color: #00a32a;
+}
+
+.status-cancelled {
+    color: #d63638;
+}
+
