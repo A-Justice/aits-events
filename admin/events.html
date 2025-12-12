@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Events - AITS Events Admin</title>
-    <link rel="stylesheet" href="css/admin-style.css">
-    <link rel="stylesheet" href="css/events.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+    <link rel="stylesheet" href="/admin/css/events.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dashicons@1.11.1/dashicons.min.css">
 </head>
 <body class="wp-admin wp-core-ui">
     <div id="wpadminbar" class="nojq">
@@ -14,8 +18,10 @@
                 <li id="wp-admin-bar-site-name" class="menupop">
                     <a class="ab-item" href="../index.html" target="_blank">Visit Site</a>
                 </li>
+            </ul>
+            <ul id="wp-admin-bar-my-account" class="ab-top-menu">
                 <li id="wp-admin-bar-my-account" class="menupop">
-                    <a class="ab-item" href="#">
+                    <a class="ab-item" href="#" id="user-profile-link">
                         <span class="display-name">Admin</span>
                     </a>
                     <ul class="ab-sub-wrapper">
@@ -31,22 +37,25 @@
         <div id="adminmenuwrap">
             <ul id="adminmenu">
                 <li class="wp-menu-separator"><div class="separator"></div></li>
-                <li class="wp-has-submenu menu-top menu-icon-dashboard">
-                    <a href="dashboard.html" class="wp-menu-image dashicons-before dashicons-dashboard">
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-dashboard">
+                    <a href="/admin/dashboard.html" class="wp-menu-image">
+                        <span class="dashicons dashicons-dashboard"></span>
                         <span class="wp-menu-name">Dashboard</span>
                     </a>
                 </li>
                 <li class="wp-has-submenu wp-has-current-submenu wp-menu-open menu-top menu-icon-events">
-                    <a href="events.html" class="wp-menu-image dashicons-before dashicons-calendar-alt">
+                    <a href="/admin/events.html" class="wp-menu-image">
+                        <span class="dashicons dashicons-calendar-alt"></span>
                         <span class="wp-menu-name">Events</span>
                     </a>
                     <ul class="wp-submenu wp-submenu-wrap">
-                        <li><a href="events.html">All Events</a></li>
-                        <li><a href="events.html?action=add">Add New</a></li>
+                        <li><a href="/admin/events.html">All Events</a></li>
+                        <li><a href="/admin/events.html?action=add">Add New</a></li>
                     </ul>
                 </li>
-                <li class="wp-has-submenu menu-top menu-icon-bookings">
-                    <a href="bookings.html" class="wp-menu-image dashicons-before dashicons-tickets-alt">
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-bookings">
+                    <a href="/admin/bookings.html" class="wp-menu-image">
+                        <span class="dashicons dashicons-tickets-alt"></span>
                         <span class="wp-menu-name">Bookings</span>
                     </a>
                 </li>
@@ -58,7 +67,7 @@
                 <!-- Event List View -->
                 <div id="events-list-view" style="display: none;">
                     <h1 class="wp-heading-inline">Events</h1>
-                    <a href="events.html?action=add" class="page-title-action">Add New</a>
+                    <a href="/admin/events.html?action=add" class="page-title-action">Add New</a>
                     <hr class="wp-header-end">
                     
                     <div id="events-table-container">
@@ -81,8 +90,10 @@
 
                 <!-- Event Form View -->
                 <div id="event-form-view" style="display: none;">
-                    <h1 class="wp-heading-inline" id="form-title">Add New Event</h1>
-                    <a href="events.html" class="page-title-action">← Back to Events</a>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                        <h1 class="wp-heading-inline" id="form-title" style="margin: 0;">Add New Event</h1>
+                        <a href="/admin/events.html" class="page-title-action">← Back to Events</a>
+                    </div>
                     <hr class="wp-header-end">
                     
                     <form id="event-form" class="event-form">
@@ -154,7 +165,7 @@
         </div>
     </div>
 
-    <script type="module" src="js/events.js"></script>
+    <script type="module" src="/admin/js/events.js"></script>
 </body>
 </html>
 

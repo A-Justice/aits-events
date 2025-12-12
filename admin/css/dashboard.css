@@ -1,68 +1,96 @@
-/* Dashboard Specific Styles */
+/* Modern Dashboard Styles */
 .dashboard-widgets-wrap {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 #dashboard-widgets {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 32px;
 }
 
 .postbox-container {
-    min-width: 300px;
+    min-width: 0;
 }
 
 .postbox {
-    background: #fff;
-    border: 1px solid #c3c4c7;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.postbox:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .postbox .hndle {
-    background: #f6f7f7;
-    border-bottom: 1px solid #c3c4c7;
-    padding: 12px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 28px;
     margin: 0;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
 }
 
 .postbox .inside {
-    padding: 12px;
+    padding: 32px 28px;
 }
 
 .postbox .main ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
 }
 
 .postbox .main li {
-    display: inline-block;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
 }
 
 .postbox .main li a {
     text-decoration: none;
-    color: #2271b1;
+    color: var(--primary);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all 0.2s;
+    padding: 16px;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.postbox .main li a:hover {
+    color: var(--primary-dark);
+    background: var(--bg-secondary);
 }
 
 .postbox .main li .count {
-    font-size: 30px;
-    font-weight: 400;
+    font-size: 56px;
+    font-weight: 700;
     line-height: 1;
-    color: #1d2327;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: -2px;
 }
 
 .postbox .main li span:last-child {
     font-size: 13px;
-    margin-top: 5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 #recent-events ul {
@@ -72,20 +100,49 @@
 }
 
 #recent-events li {
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f1;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
 }
 
 #recent-events li:last-child {
     border-bottom: none;
 }
 
+#recent-events li:hover {
+    background: var(--bg-secondary);
+    margin: 0 -28px;
+    padding-left: 28px;
+    padding-right: 28px;
+    border-radius: 12px;
+}
+
 #recent-events a {
     text-decoration: none;
-    color: #2271b1;
+    color: var(--primary);
+    font-size: 15px;
+    font-weight: 500;
+    display: block;
+    transition: color 0.2s;
 }
 
 #recent-events a:hover {
-    color: #135e96;
+    color: var(--primary-dark);
 }
 
+#recent-events p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin: 0;
+}
+
+#recent-events p a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#recent-events p a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}

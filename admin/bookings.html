@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bookings - AITS Events Admin</title>
-    <link rel="stylesheet" href="css/admin-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin-style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dashicons@1.11.1/dashicons.min.css">
 </head>
 <body class="wp-admin wp-core-ui">
     <div id="wpadminbar" class="nojq">
@@ -30,18 +34,25 @@
         <div id="adminmenuwrap">
             <ul id="adminmenu">
                 <li class="wp-menu-separator"><div class="separator"></div></li>
-                <li class="wp-has-submenu menu-top menu-icon-dashboard">
-                    <a href="dashboard.html" class="wp-menu-image dashicons-before dashicons-dashboard">
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-dashboard">
+                    <a href="/admin/dashboard.html" class="wp-menu-image">
+                        <span class="dashicons dashicons-dashboard"></span>
                         <span class="wp-menu-name">Dashboard</span>
                     </a>
                 </li>
-                <li class="wp-has-submenu menu-top menu-icon-events">
-                    <a href="events.html" class="wp-menu-image dashicons-before dashicons-calendar-alt">
+                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-events">
+                    <a href="/admin/events.html" class="wp-menu-image">
+                        <span class="dashicons dashicons-calendar-alt"></span>
                         <span class="wp-menu-name">Events</span>
                     </a>
+                    <ul class="wp-submenu wp-submenu-wrap">
+                        <li><a href="/admin/events.html">All Events</a></li>
+                        <li><a href="/admin/events.html?action=add">Add New</a></li>
+                    </ul>
                 </li>
                 <li class="wp-has-submenu wp-has-current-submenu wp-menu-open menu-top menu-icon-bookings">
-                    <a href="bookings.html" class="wp-menu-image dashicons-before dashicons-tickets-alt">
+                    <a href="/admin/bookings.html" class="wp-menu-image">
+                        <span class="dashicons dashicons-tickets-alt"></span>
                         <span class="wp-menu-name">Bookings</span>
                     </a>
                 </li>
@@ -73,7 +84,7 @@
         </div>
     </div>
 
-    <script type="module" src="js/bookings.js"></script>
+    <script type="module" src="/admin/js/bookings.js"></script>
 </body>
 </html>
 

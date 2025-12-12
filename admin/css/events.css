@@ -1,37 +1,145 @@
-/* Events Management Styles */
+/* Modern Events Management Styles */
 .row-actions {
     visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s;
+    margin-top: 10px;
+    font-size: 13px;
 }
 
 tr:hover .row-actions {
     visibility: visible;
+    opacity: 1;
 }
 
 .row-actions span {
-    color: #2271b1;
+    color: var(--text-secondary);
 }
 
 .row-actions a {
     text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    transition: color 0.2s;
+    margin-right: 12px;
+}
+
+.row-actions a:hover {
+    color: var(--primary-dark);
 }
 
 .row-actions .trash a {
-    color: #b32d2e;
+    color: var(--danger);
 }
 
 .row-actions .trash a:hover {
-    color: #d63638;
+    color: #dc2626;
+}
+
+.wp-header-end {
+    border: none;
+    border-bottom: 1px solid var(--border);
+    margin: 0 0 32px 0;
+}
+
+.event-form {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+    margin-top: 32px;
+}
+
+.event-form .form-table {
+    margin-top: 0;
+}
+
+.event-form .submit {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.event-form .submit button {
+    margin: 0;
+}
+
+#save-status {
+    margin-left: 16px;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .status-pending {
-    color: #dba617;
+    color: var(--warning);
+    font-weight: 500;
 }
 
 .status-confirmed {
-    color: #00a32a;
+    color: var(--success);
+    font-weight: 500;
 }
 
 .status-cancelled {
-    color: #d63638;
+    color: var(--danger);
+    font-weight: 500;
 }
 
+/* Table improvements */
+.wp-list-table tbody td.title {
+    font-weight: 500;
+}
+
+.wp-list-table tbody td.title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+.wp-list-table tbody td.title a:hover {
+    color: var(--primary);
+}
+
+/* Loading state */
+#events-tbody tr td {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+#events-tbody tr td a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#events-tbody tr td a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+#events-tbody tr td button {
+    margin-top: 16px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+#events-tbody tr td button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}

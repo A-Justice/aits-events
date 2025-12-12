@@ -9,7 +9,7 @@ let currentEventId = null;
 // Check authentication
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        window.location.href = 'index.html';
+        window.location.href = '/admin/index.html';
         return;
     }
     
@@ -51,14 +51,24 @@ function showEventForm() {
 // Load all events
 async function loadEvents() {
     try {
-        const eventsQuery = query(collection(db, 'events'), orderBy('startDate', 'desc'));
-        const snapshot = await getDocs(eventsQuery);
-        
         const tbody = document.getElementById('events-tbody');
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px;">Loading events...</td></tr>';
+        
+        // Try to load events - handle case where startDate might not exist
+        let snapshot;
+        try {
+            const eventsQuery = query(collection(db, 'events'), orderBy('startDate', 'desc'));
+            snapshot = await getDocs(eventsQuery);
+        } catch (orderError) {
+            // If ordering fails, just get all events
+            console.warn('Could not order by startDate, loading all events:', orderError);
+            snapshot = await getDocs(collection(db, 'events'));
+        }
+        
         tbody.innerHTML = '';
         
         if (snapshot.empty) {
-            tbody.innerHTML = '<tr><td colspan="5">No events found. <a href="events.html?action=add">Add your first event</a></td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5">No events found. <a href="/admin/events.html?action=add">Add your first event</a></td></tr>';
             return;
         }
         
@@ -79,14 +89,34 @@ async function loadEvents() {
             const row = document.createElement('tr');
             const bookingsCount = bookingsMap[docSnapshot.id] || 0;
             
-            const startDate = event.startDate ? new Date(event.startDate.seconds * 1000).toLocaleDateString() : 'N/A';
-            const endDate = event.endDate ? new Date(event.endDate.seconds * 1000).toLocaleDateString() : 'N/A';
+            let startDate = 'N/A';
+            let endDate = 'N/A';
+            
+            if (event.startDate) {
+                if (event.startDate.seconds) {
+                    startDate = new Date(event.startDate.seconds * 1000).toLocaleDateString();
+                } else if (event.startDate instanceof Date) {
+                    startDate = event.startDate.toLocaleDateString();
+                } else if (typeof event.startDate === 'string') {
+                    startDate = new Date(event.startDate).toLocaleDateString();
+                }
+            }
+            
+            if (event.endDate) {
+                if (event.endDate.seconds) {
+                    endDate = new Date(event.endDate.seconds * 1000).toLocaleDateString();
+                } else if (event.endDate instanceof Date) {
+                    endDate = event.endDate.toLocaleDateString();
+                } else if (typeof event.endDate === 'string') {
+                    endDate = new Date(event.endDate).toLocaleDateString();
+                }
+            }
             
             row.innerHTML = `
                 <td class="title column-title column-primary">
-                    <strong><a href="events.html?action=edit&id=${docSnapshot.id}">${event.title || 'Untitled'}</a></strong>
+                    <strong><a href="/admin/events.html?action=edit&id=${docSnapshot.id}">${event.title || 'Untitled'}</a></strong>
                     <div class="row-actions">
-                        <span class="edit"><a href="events.html?action=edit&id=${docSnapshot.id}">Edit</a> | </span>
+                        <span class="edit"><a href="/admin/events.html?action=edit&id=${docSnapshot.id}">Edit</a> | </span>
                         <span class="trash"><a href="#" class="delete-event" data-id="${docSnapshot.id}">Delete</a></span>
                     </div>
                 </td>
@@ -109,7 +139,12 @@ async function loadEvents() {
         });
     } catch (error) {
         console.error('Error loading events:', error);
-        document.getElementById('events-tbody').innerHTML = '<tr><td colspan="5">Error loading events. Please refresh the page.</td></tr>';
+        const tbody = document.getElementById('events-tbody');
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 40px; color: var(--danger);">
+            <p style="margin-bottom: 12px; font-weight: 600;">Error loading events</p>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">${error.message || 'Please check your connection and try again.'}</p>
+            <button onclick="location.reload()" style="padding: 8px 16px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">Refresh Page</button>
+        </td></tr>`;
     }
 }
 
@@ -119,14 +154,14 @@ async function loadEvent(id) {
         const eventDoc = await getDoc(doc(db, 'events', id));
         if (!eventDoc.exists()) {
             alert('Event not found');
-            window.location.href = 'events.html';
+            window.location.href = '/admin/events.html';
             return;
         }
         const eventData = eventDoc.data();
         
         if (!eventData) {
             alert('Event not found');
-            window.location.href = 'events.html';
+            window.location.href = '/admin/events.html';
             return;
         }
         
@@ -215,7 +250,7 @@ document.getElementById('event-form')?.addEventListener('submit', async (e) => {
         }
         
         setTimeout(() => {
-            window.location.href = 'events.html';
+            window.location.href = '/admin/events.html';
         }, 1500);
     } catch (error) {
         console.error('Error saving event:', error);
@@ -226,7 +261,7 @@ document.getElementById('event-form')?.addEventListener('submit', async (e) => {
 
 // Cancel button
 document.getElementById('cancel-btn')?.addEventListener('click', () => {
-    window.location.href = 'events.html';
+    window.location.href = '/admin/events.html';
 });
 
 // Delete event

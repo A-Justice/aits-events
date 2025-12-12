@@ -4,21 +4,27 @@ import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { logout } from './admin-auth.js';
 
+// Wait for DOM to load
+document.addEventListener('DOMContentLoaded', () => {
+    // Logout functionality
+    const logoutLink = document.getElementById('logout-link');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+    }
+});
+
 // Check authentication
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        window.location.href = 'index.html';
+        window.location.href = '/admin/index.html';
         return;
     }
     
     // Load dashboard data
     await loadDashboardData();
-});
-
-// Logout functionality
-document.getElementById('logout-link')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    logout();
 });
 
 // Load dashboard statistics
@@ -44,13 +50,13 @@ async function loadDashboardData() {
         
         const recentEventsDiv = document.getElementById('recent-events');
         if (recentEventsSnapshot.empty) {
-            recentEventsDiv.innerHTML = '<p>No events yet. <a href="events.html?action=add">Add your first event</a></p>';
+            recentEventsDiv.innerHTML = '<p>No events yet. <a href="/admin/events.html?action=add">Add your first event</a></p>';
         } else {
             const ul = document.createElement('ul');
             recentEventsSnapshot.forEach((doc) => {
                 const event = doc.data();
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="events.html?action=edit&id=${doc.id}">${event.title}</a>`;
+                li.innerHTML = `<a href="/admin/events.html?action=edit&id=${doc.id}">${event.title}</a>`;
                 ul.appendChild(li);
             });
             recentEventsDiv.innerHTML = '';

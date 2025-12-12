@@ -7,7 +7,7 @@ import { logout } from './admin-auth.js';
 // Check authentication
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        window.location.href = 'index.html';
+        window.location.href = '/admin/index.html';
         return;
     }
     
