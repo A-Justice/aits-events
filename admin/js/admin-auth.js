@@ -4,16 +4,12 @@ import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebas
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Admin auth script loaded');
     // Check if user is on login page
     const loginForm = document.getElementById('loginform');
     const errorDiv = document.getElementById('login-error');
 
-    console.log('Login form found:', loginForm);
-
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
-            console.log('Form submitted');
             e.preventDefault();
             e.stopPropagation();
             
@@ -40,7 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = '/admin/dashboard.html';
             } catch (error) {
                 errorDiv.style.display = 'block';
-                errorDiv.textContent = error.message || 'Invalid username or password.';
+                // Show user-friendly error message
+                if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    errorDiv.textContent = 'Invalid email or password.';
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorDiv.textContent = 'Too many failed attempts. Please try again later.';
+                } else {
+                    errorDiv.textContent = 'Login failed. Please try again.';
+                }
                 submitBtn.disabled = false;
                 submitBtn.value = 'Log In';
             }
@@ -52,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 onAuthStateChanged(auth, (user) => {
     const currentPath = window.location.pathname;
     
-    // If on dashboard and not logged in, redirect to login
-    if (currentPath.includes('dashboard.html') && !user) {
+    // If on admin pages (not login) and not logged in, redirect to login
+    if ((currentPath.includes('dashboard.html') || currentPath.includes('events.html') || currentPath.includes('bookings.html')) && !user) {
         window.location.href = '/admin/index.html';
     }
     
@@ -72,4 +75,3 @@ export async function logout() {
         console.error('Error signing out:', error);
     }
 }
-

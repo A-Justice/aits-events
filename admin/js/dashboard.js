@@ -23,6 +23,14 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
     
+    // Update user display name
+    const displayNameEl = document.querySelector('.display-name');
+    if (displayNameEl) {
+        // Show email username part or full email
+        const emailName = user.email.split('@')[0];
+        displayNameEl.textContent = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+    }
+    
     // Load dashboard data
     await loadDashboardData();
 });
@@ -64,6 +72,15 @@ async function loadDashboardData() {
         }
     } catch (error) {
         console.error('Error loading dashboard data:', error);
+        
+        // Show user-friendly error message
+        const recentEventsDiv = document.getElementById('recent-events');
+        if (recentEventsDiv) {
+            if (error.code === 'permission-denied') {
+                recentEventsDiv.innerHTML = '<p class="error-text">Database access denied. Please check Firebase rules.</p>';
+            } else {
+                recentEventsDiv.innerHTML = '<p class="error-text">Error loading data. Please refresh the page.</p>';
+            }
+        }
     }
 }
-

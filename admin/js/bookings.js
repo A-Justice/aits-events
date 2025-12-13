@@ -4,6 +4,9 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { logout } from './admin-auth.js';
 
+let allBookings = [];
+let eventsMap = {};
+
 // Check authentication
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -11,6 +14,14 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
     
+    // Update user display name
+    const displayNameEl = document.querySelector('.display-name');
+    if (displayNameEl) {
+        const emailName = user.email.split('@')[0];
+        displayNameEl.textContent = emailName.charAt(0).toUpperCase() + emailName.slice(1);
+    }
+    
+    await loadEvents();
     await loadBookings();
 });
 
@@ -20,49 +31,86 @@ document.getElementById('logout-link')?.addEventListener('click', (e) => {
     logout();
 });
 
-// Load all bookings
-async function loadBookings() {
+// Load events for filter dropdown
+async function loadEvents() {
     try {
-        const bookingsQuery = query(collection(db, 'bookings'), orderBy('createdAt', 'desc'));
-        const snapshot = await getDocs(bookingsQuery);
+        const eventsSnapshot = await getDocs(query(collection(db, 'events'), orderBy('startDate', 'desc')));
+        const filterSelect = document.getElementById('event-filter');
         
-        const tbody = document.getElementById('bookings-tbody');
-        tbody.innerHTML = '';
-        
-        if (snapshot.empty) {
-            tbody.innerHTML = '<tr><td colspan="7">No bookings found.</td></tr>';
-            return;
-        }
-        
-        // Get all events for lookup
-        const eventsSnapshot = await getDocs(collection(db, 'events'));
-        const eventsMap = {};
         eventsSnapshot.forEach((doc) => {
-            eventsMap[doc.id] = doc.data();
-        });
-        
-        snapshot.forEach((doc) => {
-            const booking = doc.data();
-            const event = eventsMap[booking.eventId];
-            const eventTitle = event ? event.title : 'Unknown Event';
+            const event = doc.data();
+            eventsMap[doc.id] = event;
             
-            const createdAt = booking.createdAt ? new Date(booking.createdAt.seconds * 1000).toLocaleString() : 'N/A';
-            
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><strong>${booking.name || '—'}</strong></td>
-                <td>${booking.email || '—'}</td>
-                <td>${booking.phone || '—'}</td>
-                <td>${eventTitle}</td>
-                <td>${booking.tickets || 1}</td>
-                <td>${createdAt}</td>
-                <td><span class="status-${booking.status || 'pending'}">${(booking.status || 'pending').toUpperCase()}</span></td>
-            `;
-            tbody.appendChild(row);
+            const option = document.createElement('option');
+            option.value = doc.id;
+            option.textContent = event.title || 'Untitled Event';
+            filterSelect.appendChild(option);
         });
     } catch (error) {
-        console.error('Error loading bookings:', error);
-        document.getElementById('bookings-tbody').innerHTML = '<tr><td colspan="7">Error loading bookings. Please refresh the page.</td></tr>';
+        console.error('Error loading events:', error);
     }
 }
 
+// Event filter change handler
+document.getElementById('event-filter')?.addEventListener('change', (e) => {
+    renderBookings(e.target.value);
+});
+
+// Load all bookings
+async function loadBookings() {
+    try {
+        const tbody = document.getElementById('bookings-tbody');
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">Loading bookings...</td></tr>';
+        
+        const bookingsQuery = query(collection(db, 'bookings'), orderBy('createdAt', 'desc'));
+        const snapshot = await getDocs(bookingsQuery);
+        
+        allBookings = [];
+        snapshot.forEach((doc) => {
+            allBookings.push({ id: doc.id, ...doc.data() });
+        });
+        
+        renderBookings('');
+    } catch (error) {
+        console.error('Error loading bookings:', error);
+        document.getElementById('bookings-tbody').innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--danger);">Error loading bookings. Please refresh the page.</td></tr>';
+    }
+}
+
+// Render bookings with optional filter
+function renderBookings(eventFilter) {
+    const tbody = document.getElementById('bookings-tbody');
+    tbody.innerHTML = '';
+    
+    const filteredBookings = eventFilter 
+        ? allBookings.filter(b => b.eventId === eventFilter)
+        : allBookings;
+    
+    if (filteredBookings.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">No bookings found.</td></tr>';
+        return;
+    }
+    
+    filteredBookings.forEach((booking) => {
+        const event = eventsMap[booking.eventId];
+        const eventTitle = event ? event.title : (booking.eventTitle || 'Unknown Event');
+        
+        const createdAt = booking.createdAt ? new Date(booking.createdAt.seconds * 1000).toLocaleString() : 'N/A';
+        
+        const statusClass = booking.status === 'confirmed' ? 'badge-success' 
+            : booking.status === 'cancelled' ? 'badge-danger' 
+            : 'badge-warning';
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><strong>${booking.name || '—'}</strong></td>
+            <td><a href="mailto:${booking.email}">${booking.email || '—'}</a></td>
+            <td>${booking.phone || '—'}</td>
+            <td>${eventTitle}</td>
+            <td>${booking.tickets || 1}</td>
+            <td>${createdAt}</td>
+            <td><span class="badge ${statusClass}">${booking.status || 'pending'}</span></td>
+        `;
+        tbody.appendChild(row);
+    });
+}

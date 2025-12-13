@@ -4,170 +4,639 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Event Details - AITS Events</title>
-    <link rel="stylesheet" href="../events/index.html" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Kumbh+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .event-detail-container {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --gold: #f59e0b;
+            --text-dark: #11131A;
+            --text-light: #64748b;
+            --bg-light: #F8F8F8;
+            --bg-white: #ffffff;
+            --border: #E1E1E3;
+        }
+        
+        body {
+            font-family: 'Kumbh Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Header */
+        .site-header {
+            background: var(--text-dark);
+            padding: 20px 0;
+        }
+        
+        .header-inner {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .event-header {
+        
+        .logo {
+            font-family: 'Krona One', sans-serif;
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: #fff;
+        }
+        
+        /* Back link */
+        .back-section {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+        
+        .back-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .back-link {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Event Header */
+        .event-hero {
+            background: var(--bg-white);
+            padding: 40px 0 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .event-title {
+            font-family: 'Krona One', sans-serif;
+            font-size: 42px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        
+        .event-schedule {
+            display: flex;
+            align-items: center;
+            gap: 20px;
             margin-bottom: 30px;
+            flex-wrap: wrap;
         }
+        
+        .event-date {
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+        
+        .event-price-badge {
+            background: var(--primary);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
         .event-image {
             width: 100%;
             max-height: 500px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
-        .event-info {
+        
+        /* Main Content */
+        .event-content {
+            background: var(--bg-light);
+            padding: 40px 0 60px;
+        }
+        
+        .event-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
         }
-        .event-details {
-            background: #fff;
-            padding: 30px;
+        
+        /* Sidebar */
+        .event-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .sidebar-box {
+            background: var(--bg-white);
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 24px;
+            border: 1px solid var(--border);
         }
-        .booking-form {
-            background: #f6f7f7;
-            padding: 30px;
+        
+        .sidebar-box h3 {
+            font-family: 'Krona One', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        
+        .detail-item {
+            margin-bottom: 12px;
+        }
+        
+        .detail-item strong {
+            display: block;
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .detail-item span {
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+        
+        /* Main Description */
+        .event-main {
+            background: var(--bg-white);
             border-radius: 8px;
-            position: sticky;
-            top: 20px;
+            padding: 32px;
+            border: 1px solid var(--border);
         }
-        .booking-form h3 {
-            margin-top: 0;
-        }
-        .form-group {
+        
+        .event-main h2 {
+            font-family: 'Krona One', sans-serif;
+            font-size: 22px;
+            color: var(--text-dark);
             margin-bottom: 20px;
         }
+        
+        .event-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .event-description p {
+            margin-bottom: 16px;
+        }
+        
+        /* What to Expect & Who Should Attend Sections */
+        .expect-section,
+        .attend-section {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .expect-section h3,
+        .attend-section h3 {
+            font-family: 'Krona One', sans-serif;
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .expect-cards,
+        .attend-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .info-card .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        
+        .info-card .card-icon svg {
+            color: #fff;
+        }
+        
+        .info-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+        
+        /* Booth Booking Section */
+        .booth-section {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .booth-section h3 {
+            font-family: 'Krona One', sans-serif;
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        
+        .booth-section p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .btn-booth {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--text-dark) 0%, #1a2540 100%);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-booth:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: #fff;
+        }
+        
+        /* RSVP / Booking Form */
+        .rsvp-section {
+            background: var(--bg-white);
+            border-radius: 8px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        
+        .rsvp-section h2 {
+            font-family: 'Krona One', sans-serif;
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        
+        .rsvp-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-light);
         }
+        
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.15s;
         }
-        .btn-book {
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .btn-rsvp {
             width: 100%;
-            padding: 15px;
-            background: #2271b1;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #C699FB 0%, #BB85FA 100%);
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 20px;
+            transition: all 0.2s;
+            margin-top: 8px;
         }
-        .btn-book:hover {
-            background: #135e96;
+        
+        .btn-rsvp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(187, 133, 250, 0.4);
         }
-        .btn-book:disabled {
-            background: #ccc;
+        
+        .btn-rsvp:disabled {
+            background: #94a3b8;
             cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
-        .event-price {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2271b1;
-            margin: 20px 0;
-        }
-        .event-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .event-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        
         .success-message {
-            background: #00a32a;
-            color: #fff;
-            padding: 15px;
-            border-radius: 4px;
+            background: #dcfce7;
+            color: #166534;
+            padding: 16px;
+            border-radius: 8px;
             margin-top: 20px;
             display: none;
         }
+        
         .error-message {
-            background: #d63638;
-            color: #fff;
-            padding: 15px;
-            border-radius: 4px;
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 16px;
+            border-radius: 8px;
             margin-top: 20px;
             display: none;
+        }
+        
+        /* Footer */
+        .site-footer {
+            background: var(--text-dark);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .site-footer p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-light);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 900px) {
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .event-sidebar {
+                order: -1;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .event-title {
+                font-size: 28px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .header-inner {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="event-detail-container">
-        <div id="event-content">
-            <div class="event-header">
-                <h1 id="event-title">Loading event...</h1>
-            </div>
-            
-            <div id="event-image-container"></div>
-            
-            <div class="event-info">
-                <div class="event-details">
-                    <div class="event-meta" id="event-meta"></div>
-                    <div id="event-description"></div>
-                </div>
-                
-                <div class="booking-form">
-                    <h3>Book Your Ticket</h3>
-                    <div class="event-price" id="event-price">Loading...</div>
-                    
-                    <form id="booking-form">
-                        <div class="form-group">
-                            <label for="booking-name">Full Name *</label>
-                            <input type="text" id="booking-name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="booking-email">Email *</label>
-                            <input type="email" id="booking-email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="booking-phone">Phone *</label>
-                            <input type="tel" id="booking-phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="booking-tickets">Number of Tickets *</label>
-                            <select id="booking-tickets" name="tickets" required>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn-book" id="book-btn">Book Now</button>
-                    </form>
-                    
-                    <div class="success-message" id="success-message">
-                        Booking successful! You will receive a confirmation email shortly.
-                    </div>
-                    <div class="error-message" id="error-message"></div>
-                </div>
-            </div>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="logo">AITS</a>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/events/">Events</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Back Link -->
+    <div class="back-section">
+        <div class="container">
+            <a href="/events/" class="back-link">« All Events</a>
         </div>
     </div>
+    
+    <!-- Event Hero -->
+    <section class="event-hero">
+        <div class="container">
+            <h1 class="event-title" id="event-title">Loading event...</h1>
+            <div class="event-schedule">
+                <span class="event-date" id="event-date"></span>
+                <span class="event-price-badge" id="event-price-badge">Free</span>
+            </div>
+            <div id="event-image-container"></div>
+        </div>
+    </section>
+    
+    <!-- Event Content -->
+    <section class="event-content">
+        <div class="container">
+            <div class="event-grid">
+                <!-- Main Content -->
+                <div class="event-main-wrapper">
+                    <div class="event-main">
+                        <h2 id="event-main-title">About This Event</h2>
+                        <div class="event-description" id="event-description">
+                            <p>Loading event details...</p>
+                        </div>
+                        
+                        <!-- What to Expect Section (hidden by default) -->
+                        <div class="expect-section" id="expect-section" style="display: none;">
+                            <h3>What to Expect</h3>
+                            <div class="expect-cards" id="expect-cards"></div>
+                        </div>
+                        
+                        <!-- Who Should Attend Section (hidden by default) -->
+                        <div class="attend-section" id="attend-section" style="display: none;">
+                            <h3>Who Should Attend</h3>
+                            <div class="attend-cards" id="attend-cards"></div>
+                        </div>
+                        
+                        <!-- Booth Booking Section (hidden by default) -->
+                        <div class="booth-section" id="booth-section" style="display: none;">
+                            <h3>Exhibit at This Event</h3>
+                            <p>Interested in showcasing your products or services? Book a booth and connect with industry leaders.</p>
+                            <a href="#" class="btn-booth" id="booth-link">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
+                                Book a Booth
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- RSVP / Booking Form -->
+                    <div class="rsvp-section" id="rsvp-section">
+                        <h2>RSVP Now</h2>
+                        <div class="rsvp-price" id="rsvp-price">Free</div>
+                        
+                        <form id="booking-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="booking-name">Full Name *</label>
+                                    <input type="text" id="booking-name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="booking-email">Email *</label>
+                                    <input type="email" id="booking-email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="booking-phone">Phone *</label>
+                                    <input type="tel" id="booking-phone" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="booking-tickets">Number of Tickets *</label>
+                                    <select id="booking-tickets" name="tickets" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-rsvp" id="book-btn">Submit RSVP</button>
+                        </form>
+                        
+                        <div class="success-message" id="success-message">
+                            ✓ RSVP submitted successfully! You will receive a confirmation email shortly.
+                        </div>
+                        <div class="error-message" id="error-message"></div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <aside class="event-sidebar">
+                    <div class="sidebar-box">
+                        <h3>Details</h3>
+                        <div class="detail-item" id="detail-date">
+                            <strong>Date</strong>
+                            <span>Loading...</span>
+                        </div>
+                        <div class="detail-item" id="detail-time">
+                            <strong>Time</strong>
+                            <span>Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-box">
+                        <h3>Venue</h3>
+                        <div class="detail-item" id="detail-venue">
+                            <span>Loading...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-box" id="organizer-box">
+                        <h3>Organizer</h3>
+                        <div class="detail-item" id="detail-organizer">
+                            <span>Loading...</span>
+                        </div>
+                        <div class="detail-item" id="detail-phone" style="display:none;">
+                            <strong>Phone</strong>
+                            <span></span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 AITS Events. All rights reserved.</p>
+        </div>
+    </footer>
     
     <script type="module" src="../js/event-detail.js"></script>
 </body>
 </html>
-

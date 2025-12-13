@@ -9,18 +9,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/admin/css/admin-style.css">
     <link rel="stylesheet" href="/admin/css/events.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dashicons@1.11.1/dashicons.min.css">
 </head>
 <body class="wp-admin wp-core-ui">
-    <div id="wpadminbar" class="nojq">
-        <div class="quicklinks" id="wp-toolbar" role="navigation">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    
+    <header id="wpadminbar">
+        <nav class="quicklinks" id="wp-toolbar" role="navigation">
             <ul id="wp-admin-bar-root-default" class="ab-top-menu">
-                <li id="wp-admin-bar-site-name" class="menupop">
-                    <a class="ab-item" href="../index.html" target="_blank">Visit Site</a>
+                <li>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </li>
+                <li id="wp-admin-bar-site-name">
+                    <a class="ab-item" href="../index.html" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Visit Site
+                    </a>
                 </li>
             </ul>
             <ul id="wp-admin-bar-my-account" class="ab-top-menu">
-                <li id="wp-admin-bar-my-account" class="menupop">
+                <li class="menupop">
                     <a class="ab-item" href="#" id="user-profile-link">
                         <span class="display-name">Admin</span>
                     </a>
@@ -29,37 +46,55 @@
                     </ul>
                 </li>
             </ul>
-        </div>
-    </div>
+        </nav>
+    </header>
 
     <div id="wpcontent">
         <div id="adminmenuback"></div>
         <div id="adminmenuwrap">
-            <ul id="adminmenu">
-                <li class="wp-menu-separator"><div class="separator"></div></li>
-                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-dashboard">
-                    <a href="/admin/dashboard.html" class="wp-menu-image">
-                        <span class="dashicons dashicons-dashboard"></span>
-                        <span class="wp-menu-name">Dashboard</span>
-                    </a>
-                </li>
-                <li class="wp-has-submenu wp-has-current-submenu wp-menu-open menu-top menu-icon-events">
-                    <a href="/admin/events.html" class="wp-menu-image">
-                        <span class="dashicons dashicons-calendar-alt"></span>
-                        <span class="wp-menu-name">Events</span>
-                    </a>
-                    <ul class="wp-submenu wp-submenu-wrap">
-                        <li><a href="/admin/events.html">All Events</a></li>
-                        <li><a href="/admin/events.html?action=add">Add New</a></li>
-                    </ul>
-                </li>
-                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-bookings">
-                    <a href="/admin/bookings.html" class="wp-menu-image">
-                        <span class="dashicons dashicons-tickets-alt"></span>
-                        <span class="wp-menu-name">Bookings</span>
-                    </a>
-                </li>
-            </ul>
+            <nav id="adminmenu">
+                <a href="/admin/dashboard.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/admin/events.html" class="nav-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Events</span>
+                </a>
+                <a href="/admin/bookings.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                        <path d="M13 5v2"></path>
+                        <path d="M13 17v2"></path>
+                        <path d="M13 11v2"></path>
+                    </svg>
+                    <span>Bookings</span>
+                </a>
+                <a href="/admin/booth-bookings.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <span>Booth Bookings</span>
+                </a>
+                <a href="/admin/contacts.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>Contacts</span>
+                </a>
+            </nav>
         </div>
 
         <div id="wpbody-content">
@@ -78,11 +113,12 @@
                                     <th scope="col" class="column-date">Start Date</th>
                                     <th scope="col" class="column-date">End Date</th>
                                     <th scope="col" class="column-venue">Venue</th>
+                                    <th scope="col" class="column-booth">Booth Booking</th>
                                     <th scope="col" class="column-bookings">Bookings</th>
                                 </tr>
                             </thead>
                             <tbody id="events-tbody">
-                                <tr><td colspan="5">Loading events...</td></tr>
+                                <tr><td colspan="6">Loading events...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -140,8 +176,19 @@
                                     <td><input type="text" id="event-phone" name="phone" class="regular-text"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row"><label for="event-image">Image URL</label></th>
-                                    <td><input type="url" id="event-image" name="imageUrl" class="regular-text" placeholder="https://..."></td>
+                                    <th scope="row"><label for="event-image">Event Image</label></th>
+                                    <td>
+                                        <div class="image-upload-wrapper">
+                                            <input type="file" id="event-image" name="image" accept="image/*" class="image-input">
+                                            <div id="image-preview" class="image-preview"></div>
+                                            <input type="hidden" id="event-image-url" name="imageUrl">
+                                            <p class="description">Upload an image for the event (JPG, PNG, WebP). Max 5MB.</p>
+                                            <div id="upload-progress" class="upload-progress" style="display: none;">
+                                                <div class="progress-bar"><div class="progress-fill"></div></div>
+                                                <span class="progress-text">Uploading...</span>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row"><label for="event-capacity">Capacity</label></th>
@@ -153,6 +200,62 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
+                        <!-- Booth Booking Section -->
+                        <div class="booth-booking-section">
+                            <h3>Booth Booking Configuration</h3>
+                            <table class="form-table" role="presentation">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><label for="booth-enabled">Enable Booth Booking</label></th>
+                                        <td>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="booth-enabled" name="boothEnabled">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                            <p class="description">Allow exhibitors to book booths for this event</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div id="booth-options-container" style="display: none;">
+                                <h4>Booth Options</h4>
+                                <p class="description">Configure the booth packages available for this event</p>
+                                
+                                <div id="booth-options-list"></div>
+                                
+                                <button type="button" class="button" id="add-booth-option">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px; vertical-align: middle;">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    Add Booth Option
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- What to Expect Section -->
+                        <div class="event-extras-section">
+                            <h3>What to Expect</h3>
+                            <p class="description">Add highlights of what attendees can expect at this event</p>
+                            <div id="what-to-expect-list" class="tags-list"></div>
+                            <div class="add-item-inline">
+                                <input type="text" id="new-expect-item" placeholder="e.g., Keynote Speeches, Networking Sessions">
+                                <button type="button" class="button" id="add-expect-item">Add Item</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Who Should Attend Section -->
+                        <div class="event-extras-section">
+                            <h3>Who Should Attend</h3>
+                            <p class="description">Define the target audience for this event</p>
+                            <div id="who-should-attend-list" class="tags-list"></div>
+                            <div class="add-item-inline">
+                                <input type="text" id="new-attend-item" placeholder="e.g., Industry Leaders, Manufacturers">
+                                <button type="button" class="button" id="add-attend-item">Add Item</button>
+                            </div>
+                        </div>
                         
                         <p class="submit">
                             <button type="submit" class="button button-primary button-large" id="save-event-btn">Publish</button>
@@ -166,6 +269,30 @@
     </div>
 
     <script type="module" src="/admin/js/events.js"></script>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebar = document.getElementById('adminmenuwrap');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+        
+        // Close menu when clicking a nav link
+        document.querySelectorAll('#adminmenu .nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
 

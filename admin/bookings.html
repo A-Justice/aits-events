@@ -8,17 +8,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/admin/css/admin-style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dashicons@1.11.1/dashicons.min.css">
 </head>
 <body class="wp-admin wp-core-ui">
-    <div id="wpadminbar" class="nojq">
-        <div class="quicklinks" id="wp-toolbar" role="navigation">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    
+    <header id="wpadminbar">
+        <nav class="quicklinks" id="wp-toolbar" role="navigation">
             <ul id="wp-admin-bar-root-default" class="ab-top-menu">
-                <li id="wp-admin-bar-site-name" class="menupop">
-                    <a class="ab-item" href="../index.html" target="_blank">Visit Site</a>
+                <li>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
                 </li>
-                <li id="wp-admin-bar-my-account" class="menupop">
-                    <a class="ab-item" href="#">
+                <li id="wp-admin-bar-site-name">
+                    <a class="ab-item" href="../index.html" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        Visit Site
+                    </a>
+                </li>
+            </ul>
+            <ul id="wp-admin-bar-my-account" class="ab-top-menu">
+                <li class="menupop">
+                    <a class="ab-item" href="#" id="user-profile-link">
                         <span class="display-name">Admin</span>
                     </a>
                     <ul class="ab-sub-wrapper">
@@ -26,43 +45,67 @@
                     </ul>
                 </li>
             </ul>
-        </div>
-    </div>
+        </nav>
+    </header>
 
     <div id="wpcontent">
         <div id="adminmenuback"></div>
         <div id="adminmenuwrap">
-            <ul id="adminmenu">
-                <li class="wp-menu-separator"><div class="separator"></div></li>
-                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-dashboard">
-                    <a href="/admin/dashboard.html" class="wp-menu-image">
-                        <span class="dashicons dashicons-dashboard"></span>
-                        <span class="wp-menu-name">Dashboard</span>
-                    </a>
-                </li>
-                <li class="wp-has-submenu wp-not-current-submenu menu-top menu-icon-events">
-                    <a href="/admin/events.html" class="wp-menu-image">
-                        <span class="dashicons dashicons-calendar-alt"></span>
-                        <span class="wp-menu-name">Events</span>
-                    </a>
-                    <ul class="wp-submenu wp-submenu-wrap">
-                        <li><a href="/admin/events.html">All Events</a></li>
-                        <li><a href="/admin/events.html?action=add">Add New</a></li>
-                    </ul>
-                </li>
-                <li class="wp-has-submenu wp-has-current-submenu wp-menu-open menu-top menu-icon-bookings">
-                    <a href="/admin/bookings.html" class="wp-menu-image">
-                        <span class="dashicons dashicons-tickets-alt"></span>
-                        <span class="wp-menu-name">Bookings</span>
-                    </a>
-                </li>
-            </ul>
+            <nav id="adminmenu">
+                <a href="/admin/dashboard.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/admin/events.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Events</span>
+                </a>
+                <a href="/admin/bookings.html" class="nav-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                        <path d="M13 5v2"></path>
+                        <path d="M13 17v2"></path>
+                        <path d="M13 11v2"></path>
+                    </svg>
+                    <span>Bookings</span>
+                </a>
+                <a href="/admin/booth-bookings.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <span>Booth Bookings</span>
+                </a>
+                <a href="/admin/contacts.html" class="nav-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>Contacts</span>
+                </a>
+            </nav>
         </div>
 
         <div id="wpbody-content">
             <div class="wrap">
                 <h1 class="wp-heading-inline">Bookings</h1>
-                <hr class="wp-header-end">
+                
+                <div class="filter-bar">
+                    <label for="event-filter">Filter by Event:</label>
+                    <select id="event-filter" class="event-filter-select">
+                        <option value="">All Events</option>
+                    </select>
+                </div>
                 
                 <table class="wp-list-table widefat fixed striped table-view-list">
                     <thead>
@@ -85,6 +128,30 @@
     </div>
 
     <script type="module" src="/admin/js/bookings.js"></script>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebar = document.getElementById('adminmenuwrap');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+        
+        // Close menu when clicking a nav link
+        document.querySelectorAll('#adminmenu .nav-item').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
 

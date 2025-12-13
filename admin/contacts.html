@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - AITS Events Admin</title>
+    <title>Contact Submissions - AITS Events Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/admin/css/admin-style.css">
-    <link rel="stylesheet" href="/admin/css/dashboard.css">
 </head>
 <body class="wp-admin wp-core-ui">
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -53,7 +52,7 @@
         <div id="adminmenuback"></div>
         <div id="adminmenuwrap">
             <nav id="adminmenu">
-                <a href="/admin/dashboard.html" class="nav-item active">
+                <a href="/admin/dashboard.html" class="nav-item">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="7" height="7" rx="1"></rect>
                         <rect x="14" y="3" width="7" height="7" rx="1"></rect>
@@ -87,7 +86,7 @@
                     </svg>
                     <span>Booth Bookings</span>
                 </a>
-                <a href="/admin/contacts.html" class="nav-item">
+                <a href="/admin/contacts.html" class="nav-item active">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
@@ -99,76 +98,80 @@
 
         <div id="wpbody-content">
             <div class="wrap">
-                <h1 class="wp-heading-inline">Dashboard</h1>
+                <h1 class="wp-heading-inline">Contact Submissions</h1>
                 
-                <div class="dashboard-widgets-wrap">
-                    <div id="dashboard-widgets" class="metabox-holder">
-                        <div class="postbox-container">
-                            <div class="meta-box-sortables">
-                                <div class="postbox">
-                                    <h2 class="hndle"><span>At a Glance</span></h2>
-                                    <div class="inside">
-                                        <div class="main">
-                                            <ul>
-                                                <li class="post-count">
-                                                    <a href="/admin/events.html">
-                                                        <span class="count" id="events-count">0</span>
-                                                        <span>Events</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-count">
-                                                    <a href="/admin/bookings.html">
-                                                        <span class="count" id="bookings-count">0</span>
-                                                        <span>Bookings</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="postbox-container">
-                            <div class="meta-box-sortables">
-                                <div class="postbox">
-                                    <h2 class="hndle"><span>Recent Events</span></h2>
-                                    <div class="inside">
-                                        <div class="main" id="recent-events">
-                                            <p>Loading...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="filter-bar">
+                    <label for="status-filter">Filter by Status:</label>
+                    <select id="status-filter" class="event-filter-select">
+                        <option value="">All</option>
+                        <option value="new">New</option>
+                        <option value="read">Read</option>
+                        <option value="replied">Replied</option>
+                    </select>
                 </div>
+                
+                <table class="wp-list-table widefat fixed striped table-view-list">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="column-name">Name</th>
+                            <th scope="col" class="column-email">Email</th>
+                            <th scope="col" class="column-phone">Phone</th>
+                            <th scope="col" class="column-subject">Subject</th>
+                            <th scope="col" class="column-date">Date</th>
+                            <th scope="col" class="column-status">Status</th>
+                            <th scope="col" class="column-actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contacts-tbody">
+                        <tr><td colspan="7" style="text-align: center; padding: 40px;">Loading contacts...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <script type="module" src="/admin/js/dashboard.js"></script>
+    <!-- Message Detail Modal -->
+    <div id="message-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-subject">Subject</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-info">
+                    <p><strong>From:</strong> <span id="modal-name"></span></p>
+                    <p><strong>Email:</strong> <a href="#" id="modal-email"></a></p>
+                    <p><strong>Phone:</strong> <span id="modal-phone"></span></p>
+                    <p><strong>Date:</strong> <span id="modal-date"></span></p>
+                </div>
+                <div class="message-content">
+                    <h3>Message</h3>
+                    <p id="modal-message"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-reply-btn" class="button button-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                        <polyline points="9 17 4 12 9 7"></polyline>
+                        <path d="M20 18v-2a4 4 0 0 0-4-4H4"></path>
+                    </svg>
+                    Reply via Email
+                </a>
+                <button id="mark-replied-btn" class="button">Mark as Replied</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/admin/js/contacts.js"></script>
     <script>
         // Mobile menu toggle
-        const menuToggle = document.getElementById('mobile-menu-toggle');
-        const sidebar = document.getElementById('adminmenuwrap');
-        const overlay = document.getElementById('sidebar-overlay');
-        
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
+        document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('adminmenuwrap').classList.toggle('active');
+            document.getElementById('sidebar-overlay').classList.toggle('active');
         });
-        
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-        });
-        
-        // Close menu when clicking a nav link
-        document.querySelectorAll('#adminmenu .nav-item').forEach(link => {
-            link.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                overlay.classList.remove('active');
-            });
+        document.getElementById('sidebar-overlay')?.addEventListener('click', () => {
+            document.getElementById('adminmenuwrap').classList.remove('active');
+            document.getElementById('sidebar-overlay').classList.remove('active');
         });
     </script>
 </body>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seed Events - AITS Events Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #0c1222 0%, #1a2540 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        
+        p {
+            color: #64748b;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            color: #92400e;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        #seed-status {
+            margin-top: 24px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            min-height: 100px;
+        }
+        
+        #seed-status p {
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seed Past Events</h1>
+        <p>This will add the following past events to Firebase:</p>
+        <ul style="margin-bottom: 24px; margin-left: 20px; color: #64748b;">
+            <li>Manufacturing Competitiveness Workshop (Nov 20, 2025)</li>
+            <li>Policy Round Table 2.0 (Aug 21, 2025)</li>
+            <li>Skills for Jobs - Training for Employment (May 1, 2025)</li>
+        </ul>
+        
+        <div class="warning">
+            <strong>Note:</strong> Only run this once. Running it multiple times will create duplicate events.
+        </div>
+        
+        <button id="seed-btn" onclick="runSeed()">Seed Events to Firebase</button>
+        
+        <div id="seed-status">
+            <p style="color: #94a3b8;">Click the button above to start seeding events...</p>
+        </div>
+        
+        <a href="/admin/events.html" class="back-link">← Back to Events</a>
+    </div>
+    
+    <script type="module">
+        import './js/seed-events.js';
+        
+        window.runSeed = async function() {
+            const btn = document.getElementById('seed-btn');
+            btn.disabled = true;
+            btn.textContent = 'Seeding...';
+            
+            await window.seedEvents();
+            
+            btn.textContent = 'Done!';
+        };
+    </script>
+</body>
+</html>
+

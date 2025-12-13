@@ -25,13 +25,31 @@ async function loadEvents() {
             const event = doc.data();
             const eventEndDate = event.endDate ? event.endDate : event.startDate;
             
-            if (eventEndDate && eventEndDate.seconds) {
-                const endDate = new Date(eventEndDate.seconds * 1000);
+            // Handle different date formats
+            let endDate = null;
+            if (eventEndDate) {
+                if (eventEndDate.seconds) {
+                    // Firebase Timestamp
+                    endDate = new Date(eventEndDate.seconds * 1000);
+                } else if (eventEndDate instanceof Date) {
+                    endDate = eventEndDate;
+                } else if (typeof eventEndDate === 'string') {
+                    endDate = new Date(eventEndDate);
+                } else if (eventEndDate.toDate) {
+                    // Firebase Timestamp with toDate method
+                    endDate = eventEndDate.toDate();
+                }
+            }
+            
+            if (endDate && !isNaN(endDate.getTime())) {
                 if (endDate >= today) {
                     upcomingEvents.push({ id: doc.id, ...event });
                 } else {
                     pastEvents.push({ id: doc.id, ...event });
                 }
+            } else {
+                // If no valid date, treat as upcoming to not hide events
+                upcomingEvents.push({ id: doc.id, ...event });
             }
         });
         
@@ -54,10 +72,18 @@ async function loadEvents() {
         
         // Render upcoming events
         const upcomingContainer = document.querySelector('.tribe-events-calendar-list');
+        
+        // Hide/show the static "no events" message from WordPress
+        const headerMessages = document.querySelectorAll('.tribe-events-header__messages');
+        
         if (upcomingContainer) {
             if (upcomingSnapshot.empty) {
                 upcomingContainer.innerHTML = '<p>There are no upcoming events.</p>';
+                // Show the static messages
+                headerMessages.forEach(msg => msg.style.display = 'block');
             } else {
+                // Hide the static "no events" messages
+                headerMessages.forEach(msg => msg.style.display = 'none');
                 renderEvents(upcomingSnapshot, upcomingContainer, 'upcoming');
             }
         }
@@ -65,8 +91,11 @@ async function loadEvents() {
         // Render past events
         const pastContainer = document.querySelector('.tribe-events-calendar-latest-past');
         if (pastContainer) {
+            // Clear all static/hardcoded content first
+            pastContainer.innerHTML = '<h2 class="tribe-events-calendar-latest-past__heading tribe-common-h5 tribe-common-h3--min-medium">Latest Past Events</h2>';
+            
             if (pastSnapshot.empty) {
-                pastContainer.innerHTML = '<p>No past events.</p>';
+                pastContainer.innerHTML += '<p style="padding: 20px 0; color: #64748b;">No past events.</p>';
             } else {
                 renderEvents(pastSnapshot, pastContainer, 'past');
             }

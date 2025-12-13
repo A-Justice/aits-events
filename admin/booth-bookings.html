@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - AITS Events Admin</title>
+    <title>Booth Bookings - AITS Events Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/admin/css/admin-style.css">
-    <link rel="stylesheet" href="/admin/css/dashboard.css">
 </head>
 <body class="wp-admin wp-core-ui">
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -53,7 +52,7 @@
         <div id="adminmenuback"></div>
         <div id="adminmenuwrap">
             <nav id="adminmenu">
-                <a href="/admin/dashboard.html" class="nav-item active">
+                <a href="/admin/dashboard.html" class="nav-item">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="3" width="7" height="7" rx="1"></rect>
                         <rect x="14" y="3" width="7" height="7" rx="1"></rect>
@@ -80,7 +79,7 @@
                     </svg>
                     <span>Bookings</span>
                 </a>
-                <a href="/admin/booth-bookings.html" class="nav-item">
+                <a href="/admin/booth-bookings.html" class="nav-item active">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
@@ -99,54 +98,39 @@
 
         <div id="wpbody-content">
             <div class="wrap">
-                <h1 class="wp-heading-inline">Dashboard</h1>
+                <h1 class="wp-heading-inline">Booth Bookings</h1>
                 
-                <div class="dashboard-widgets-wrap">
-                    <div id="dashboard-widgets" class="metabox-holder">
-                        <div class="postbox-container">
-                            <div class="meta-box-sortables">
-                                <div class="postbox">
-                                    <h2 class="hndle"><span>At a Glance</span></h2>
-                                    <div class="inside">
-                                        <div class="main">
-                                            <ul>
-                                                <li class="post-count">
-                                                    <a href="/admin/events.html">
-                                                        <span class="count" id="events-count">0</span>
-                                                        <span>Events</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-count">
-                                                    <a href="/admin/bookings.html">
-                                                        <span class="count" id="bookings-count">0</span>
-                                                        <span>Bookings</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="postbox-container">
-                            <div class="meta-box-sortables">
-                                <div class="postbox">
-                                    <h2 class="hndle"><span>Recent Events</span></h2>
-                                    <div class="inside">
-                                        <div class="main" id="recent-events">
-                                            <p>Loading...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="filter-bar">
+                    <label for="event-filter">Filter by Event:</label>
+                    <select id="event-filter" class="event-filter-select">
+                        <option value="">All Events</option>
+                    </select>
+                </div>
+                
+                <div class="table-container" style="margin-top: 24px;">
+                    <table class="wp-list-table widefat fixed striped">
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Event</th>
+                                <th>Booth Option</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booth-bookings-tbody">
+                            <tr><td colspan="8" style="text-align: center; padding: 40px;">Loading...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="module" src="/admin/js/dashboard.js"></script>
+    <script type="module" src="/admin/js/booth-bookings.js"></script>
     <script>
         // Mobile menu toggle
         const menuToggle = document.getElementById('mobile-menu-toggle');
@@ -163,7 +147,6 @@
             overlay.classList.remove('active');
         });
         
-        // Close menu when clicking a nav link
         document.querySelectorAll('#adminmenu .nav-item').forEach(link => {
             link.addEventListener('click', () => {
                 sidebar.classList.remove('open');

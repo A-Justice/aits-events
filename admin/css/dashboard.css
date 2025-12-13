@@ -1,12 +1,12 @@
 /* Modern Dashboard Styles */
 .dashboard-widgets-wrap {
-    margin-top: 40px;
+    margin-top: 32px;
 }
 
 #dashboard-widgets {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
 }
 
 .postbox-container {
@@ -18,29 +18,28 @@
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     margin-bottom: 0;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all 0.3s;
+    transition: all 0.2s ease;
 }
 
 .postbox:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
 }
 
 .postbox .hndle {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
-    padding: 24px 28px;
+    padding: 18px 24px;
     margin: 0;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
 }
 
 .postbox .inside {
-    padding: 32px 28px;
+    padding: 28px 24px;
 }
 
 .postbox .main ul {
@@ -48,7 +47,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 48px;
+    gap: 32px;
     flex-wrap: wrap;
 }
 
@@ -56,7 +55,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 140px;
+    min-width: 100px;
 }
 
 .postbox .main li a {
@@ -65,28 +64,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.2s;
-    padding: 16px;
-    border-radius: 12px;
+    transition: all 0.15s;
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
     width: 100%;
 }
 
 .postbox .main li a:hover {
     color: var(--primary-dark);
-    background: var(--bg-secondary);
+    background: var(--primary-glow);
 }
 
 .postbox .main li .count {
-    font-size: 56px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 1;
     color: var(--text-primary);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     letter-spacing: -2px;
 }
 
 .postbox .main li span:last-child {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -100,9 +99,9 @@
 }
 
 #recent-events li {
-    padding: 16px 0;
+    padding: 14px 0;
     border-bottom: 1px solid var(--border);
-    transition: all 0.2s;
+    transition: all 0.15s;
 }
 
 #recent-events li:last-child {
@@ -111,19 +110,19 @@
 
 #recent-events li:hover {
     background: var(--bg-secondary);
-    margin: 0 -28px;
-    padding-left: 28px;
-    padding-right: 28px;
-    border-radius: 12px;
+    margin: 0 -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-radius: var(--radius-sm);
 }
 
 #recent-events a {
     text-decoration: none;
     color: var(--primary);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     display: block;
-    transition: color 0.2s;
+    transition: color 0.15s;
 }
 
 #recent-events a:hover {
@@ -132,7 +131,7 @@
 
 #recent-events p {
     color: var(--text-secondary);
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
 }
 

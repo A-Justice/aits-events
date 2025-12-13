@@ -6,30 +6,40 @@
 }
 
 :root {
-    --primary: #3b82f6;
-    --primary-dark: #2563eb;
-    --primary-light: #60a5fa;
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-glow: rgba(99, 102, 241, 0.15);
     --secondary: #8b5cf6;
     --success: #10b981;
     --danger: #ef4444;
     --warning: #f59e0b;
     --bg-primary: #ffffff;
     --bg-secondary: #f8fafc;
-    --bg-dark: #0f172a;
-    --bg-dark-hover: #1e293b;
+    --bg-dark: #0c1222;
+    --bg-dark-secondary: #131b2e;
+    --bg-dark-hover: #1a2540;
     --text-primary: #0f172a;
     --text-secondary: #64748b;
     --text-light: #94a3b8;
+    --text-dark: #e2e8f0;
+    --text-dark-muted: #94a3b8;
     --border: #e2e8f0;
+    --border-dark: rgba(255, 255, 255, 0.08);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --sidebar-width: 260px;
+    --topbar-height: 64px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--bg-secondary);
@@ -43,9 +53,14 @@ body.wp-admin {
     padding-top: 0;
 }
 
-/* Login Page */
+/* ==========================================
+   LOGIN PAGE
+   ========================================== */
 body.login {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bg-dark);
+    background-image: 
+        radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,11 +70,12 @@ body.login {
 
 #login {
     width: 100%;
-    max-width: 440px;
-    padding: 48px;
-    background: #ffffff;
-    box-shadow: var(--shadow-lg);
-    border-radius: 20px;
+    max-width: 420px;
+    padding: 40px;
+    background: var(--bg-dark-secondary);
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-lg);
 }
 
 #login h1 {
@@ -68,15 +84,15 @@ body.login {
 }
 
 #login h1 a {
-    color: var(--primary);
+    color: #ffffff;
     text-decoration: none;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
 
 #login form {
-    margin-top: 32px;
+    margin-top: 24px;
 }
 
 #login form p {
@@ -86,27 +102,27 @@ body.login {
 #login form label {
     display: block;
     margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 13px;
 }
 
 #login form .input {
     width: 100%;
     padding: 12px 16px;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.5;
-    color: var(--text-primary);
-    background-color: #ffffff;
-    border: 2px solid var(--border);
-    border-radius: 10px;
+    color: var(--text-dark);
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
     transition: all 0.2s;
 }
 
 #login form .input:focus {
     border-color: var(--primary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
 #login .forgetmenot {
@@ -117,7 +133,7 @@ body.login {
     display: inline;
     font-weight: 400;
     margin-left: 8px;
-    color: var(--text-secondary);
+    color: var(--text-dark-muted);
 }
 
 #login .submit {
@@ -125,16 +141,18 @@ body.login {
 }
 
 .button, .button-primary {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.5;
     min-height: 44px;
     margin: 0;
     padding: 0 24px;
     cursor: pointer;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     white-space: nowrap;
     box-sizing: border-box;
     font-weight: 600;
@@ -142,59 +160,61 @@ body.login {
 }
 
 .button-primary {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #ffffff;
     width: 100%;
-    padding: 12px;
-    font-size: 15px;
+    padding: 14px;
+    font-size: 14px;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
 }
 
 .button-primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
 }
 
 .error-message {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    border-left: 4px solid var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
     padding: 12px 16px;
     margin-top: 16px;
-    color: var(--danger);
-    border-radius: 10px;
-    font-size: 14px;
+    color: #f87171;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
 }
 
-/* Modern Layout */
+/* ==========================================
+   LAYOUT STRUCTURE
+   ========================================== */
 .wrap {
     margin: 0;
     padding: 0;
 }
 
 #wpcontent {
-    margin-left: 280px;
+    margin-left: var(--sidebar-width);
     padding: 0;
     min-height: 100vh;
     transition: margin-left 0.3s ease;
 }
 
 #wpbody-content {
-    padding: 40px 48px;
+    padding: 32px 40px;
     background: var(--bg-secondary);
-    min-height: 100vh;
+    min-height: calc(100vh - var(--topbar-height));
 }
 
-/* Modern Sidebar */
+/* ==========================================
+   SIDEBAR NAVIGATION
+   ========================================== */
 #adminmenuback {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    width: 280px;
+    width: var(--sidebar-width);
     background: var(--bg-dark);
     z-index: 1000;
-    box-shadow: 2px 0 12px rgba(0,0,0,.08);
 }
 
 #adminmenuwrap {
@@ -202,11 +222,13 @@ body.login {
     top: 0;
     bottom: 0;
     left: 0;
-    width: 280px;
+    width: var(--sidebar-width);
     background: var(--bg-dark);
     z-index: 1001;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 #adminmenuwrap::-webkit-scrollbar {
@@ -214,172 +236,111 @@ body.login {
 }
 
 #adminmenuwrap::-webkit-scrollbar-track {
-    background: var(--bg-dark);
+    background: transparent;
 }
 
 #adminmenuwrap::-webkit-scrollbar-thumb {
-    background: var(--bg-dark-hover);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
 }
 
 #adminmenuwrap::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: rgba(255, 255, 255, 0.2);
 }
 
+/* Sidebar Logo/Brand Area */
+#adminmenuwrap::before {
+    content: 'AITS Events';
+    display: block;
+    padding: 28px 24px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    border-bottom: 1px solid var(--border-dark);
+    flex-shrink: 0;
+}
+
+/* Navigation Menu */
 #adminmenu {
-    margin: 0;
-    padding: 32px 0;
-    list-style: none;
-    background: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 24px 16px;
+    flex: 1;
 }
 
-#adminmenu li {
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-
-#adminmenu > li {
-    margin-bottom: 6px;
-    padding: 0 16px;
-}
-
-#adminmenu > li > a {
+/* Navigation Items */
+.nav-item {
     display: flex;
     align-items: center;
+    gap: 14px;
     padding: 14px 18px;
-    color: #cbd5e1;
+    color: var(--text-dark-muted);
     text-decoration: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    border-radius: var(--radius-md);
     font-size: 15px;
     font-weight: 500;
+    transition: all 0.2s ease;
     position: relative;
 }
 
-#adminmenu > li > a:hover {
+.nav-item:hover {
     color: #ffffff;
     background: var(--bg-dark-hover);
 }
 
-#adminmenu .wp-menu-image {
-    width: 22px;
-    height: 22px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    pointer-events: none;
-}
-
-#adminmenu .wp-menu-image .dashicons {
-    font-size: 22px;
-    width: 22px;
-    height: 22px;
-    line-height: 1;
-    color: #94a3b8;
-    font-family: dashicons;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: color 0.2s ease;
-}
-
-#adminmenu > li > a:hover .dashicons {
+.nav-item:hover .nav-icon {
     color: var(--primary-light);
 }
 
-#adminmenu .wp-menu-name {
-    margin-left: 14px;
-    pointer-events: none;
-    flex: 1;
-    font-size: 15px;
-    line-height: 1.4;
+/* Navigation Icons */
+.nav-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--text-dark-muted);
+    transition: color 0.2s ease;
 }
 
-/* Active Menu Item */
-#adminmenu .current,
-#adminmenu .wp-has-current-submenu {
-    background: transparent;
-}
-
-#adminmenu .current > a,
-#adminmenu .wp-has-current-submenu > a {
+/* Active Navigation Item */
+.nav-item.active {
     color: #ffffff;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
 }
 
-#adminmenu .current .dashicons,
-#adminmenu .wp-has-current-submenu .dashicons {
+.nav-item.active .nav-icon {
     color: #ffffff;
 }
 
-/* Modern Submenu */
-#adminmenu .wp-submenu {
-    list-style: none;
-    margin: 10px 0 0 0;
-    padding: 8px 0;
-    display: none;
-    background: transparent;
+.nav-item.active:hover {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
 }
 
-#adminmenu .wp-has-submenu:hover .wp-submenu,
-#adminmenu .wp-menu-open .wp-submenu {
-    display: block;
-}
-
-#adminmenu .wp-submenu li {
-    margin: 0;
-    padding: 0 16px;
-}
-
-#adminmenu .wp-submenu a {
-    padding: 10px 18px 10px 54px;
-    color: #94a3b8;
-    font-size: 14px;
-    border-radius: 10px;
-    display: block;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    line-height: 1.4;
-    font-weight: 400;
-}
-
-#adminmenu .wp-submenu a:hover {
-    color: #ffffff;
-    background: var(--bg-dark-hover);
-}
-
-#adminmenu .wp-submenu .current a,
-#adminmenu .wp-submenu a.current {
-    color: #ffffff;
-    background: var(--primary);
-    font-weight: 500;
-}
-
-/* Modern Top Bar */
+/* ==========================================
+   TOP BAR
+   ========================================== */
 #wpadminbar {
     position: fixed;
     top: 0;
-    left: 280px;
+    left: var(--sidebar-width);
     right: 0;
-    height: 72px;
+    height: var(--topbar-height);
     background: #ffffff;
     z-index: 999;
     color: var(--text-primary);
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    padding: 0 48px;
+    padding: 0 32px;
 }
 
 #wpadminbar .quicklinks {
     width: 100%;
-    height: 72px;
+    height: var(--topbar-height);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -391,30 +352,93 @@ body.login {
     padding: 0;
     display: flex;
     align-items: center;
-    height: 72px;
-    gap: 32px;
+    height: var(--topbar-height);
+    gap: 8px;
 }
 
 #wpadminbar li {
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
-#wpadminbar .ab-item {
-    padding: 10px 18px;
+/* Left side - Visit Site button */
+#wpadminbar #wp-admin-bar-root-default .ab-item {
+    padding: 8px 16px;
     line-height: 1.5;
     color: var(--text-secondary);
     text-decoration: none;
-    display: block;
-    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
     font-weight: 500;
-    transition: all 0.2s;
-    border-radius: 10px;
+    transition: all 0.15s;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: #ffffff;
 }
 
-#wpadminbar .ab-item:hover {
+#wpadminbar #wp-admin-bar-root-default .ab-item:hover {
     color: var(--primary);
+    border-color: var(--primary);
+    background: var(--primary-glow);
+}
+
+/* Right side - User Account Area */
+#wpadminbar #wp-admin-bar-my-account {
+    position: relative;
+}
+
+#wpadminbar #wp-admin-bar-my-account > li {
+    position: relative;
+}
+
+#wpadminbar #wp-admin-bar-my-account .ab-item {
+    padding: 8px 16px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    border-radius: var(--radius-sm);
     background: var(--bg-secondary);
+    border: 1px solid var(--border);
+}
+
+#wpadminbar #wp-admin-bar-my-account .ab-item:hover {
+    background: var(--bg-primary);
+    border-color: var(--primary);
+}
+
+#wpadminbar #wp-admin-bar-my-account .ab-item::before {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#wpadminbar #wp-admin-bar-my-account .ab-item::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--text-secondary);
+    margin-left: 4px;
+    transition: transform 0.15s;
+}
+
+#wpadminbar #wp-admin-bar-my-account .menupop:hover .ab-item::after {
+    transform: rotate(180deg);
 }
 
 #wpadminbar .display-name {
@@ -422,9 +446,64 @@ body.login {
     color: var(--text-primary);
 }
 
+/* Dropdown Menu */
+#wpadminbar .ab-sub-wrapper {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    min-width: 180px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.15s ease;
+    z-index: 1000;
+}
+
+#wpadminbar .menupop:hover .ab-sub-wrapper {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#wpadminbar .ab-sub-wrapper li {
+    margin: 0;
+}
+
+#wpadminbar .ab-sub-wrapper a {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: all 0.15s;
+}
+
+#wpadminbar .ab-sub-wrapper a:hover {
+    background: var(--bg-secondary);
+    color: var(--primary);
+}
+
+#wpadminbar .ab-sub-wrapper #logout-link {
+    color: var(--danger);
+}
+
+#wpadminbar .ab-sub-wrapper #logout-link:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: var(--danger);
+}
+
 /* Adjust content for top bar */
 body.wp-admin #wpcontent {
-    margin-top: 72px;
+    margin-top: var(--topbar-height);
 }
 
 body.wp-admin #adminmenuback,
@@ -432,46 +511,51 @@ body.wp-admin #adminmenuwrap {
     top: 0;
 }
 
-/* Admin Content */
+/* ==========================================
+   PAGE CONTENT
+   ========================================== */
 .wp-heading-inline {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 700;
     padding: 0;
-    margin: 0 0 32px 0;
+    margin: 0 0 28px 0;
     line-height: 1.2;
     color: var(--text-primary);
-    letter-spacing: -0.8px;
+    letter-spacing: -0.5px;
 }
 
 .page-title-action {
-    display: inline-block;
-    margin-left: 20px;
-    padding: 12px 24px;
-    background: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    margin-left: 16px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #ffffff;
     text-decoration: none;
-    border-radius: 10px;
-    font-size: 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
     font-weight: 600;
     transition: all 0.2s;
     vertical-align: middle;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .page-title-action:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
     color: #ffffff;
 }
 
-/* Modern Tables */
+/* ==========================================
+   TABLES
+   ========================================== */
 .wp-list-table {
     width: 100%;
     background: #ffffff;
     border: 1px solid var(--border);
     border-spacing: 0;
-    margin-top: 32px;
-    border-radius: 16px;
+    margin-top: 24px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
 }
@@ -479,19 +563,19 @@ body.wp-admin #adminmenuwrap {
 .wp-list-table thead th {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
-    padding: 18px 24px;
+    padding: 14px 20px;
     text-align: left;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .wp-list-table tbody td {
-    padding: 20px 24px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border);
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-primary);
 }
 
@@ -503,31 +587,33 @@ body.wp-admin #adminmenuwrap {
     background: var(--bg-secondary);
 }
 
-/* Modern Forms */
+/* ==========================================
+   FORMS
+   ========================================== */
 .form-table {
     width: 100%;
     background: #ffffff;
     border: 1px solid var(--border);
     border-spacing: 0;
-    margin-top: 32px;
-    border-radius: 16px;
+    margin-top: 24px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow);
 }
 
 .form-table th {
-    width: 220px;
-    padding: 28px;
+    width: 200px;
+    padding: 24px;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
     text-align: left;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-primary);
 }
 
 .form-table td {
-    padding: 28px;
+    padding: 24px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -544,12 +630,12 @@ body.wp-admin #adminmenuwrap {
 .form-table textarea,
 .form-table select {
     width: 100%;
-    max-width: 600px;
-    padding: 12px 16px;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    font-size: 15px;
-    transition: all 0.2s;
+    max-width: 480px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: all 0.15s;
     background: #ffffff;
     color: var(--text-primary);
     font-family: inherit;
@@ -560,24 +646,26 @@ body.wp-admin #adminmenuwrap {
 .form-table select:focus {
     border-color: var(--primary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
 .form-table textarea {
-    min-height: 140px;
+    min-height: 120px;
     resize: vertical;
 }
 
-/* Modern Buttons */
+/* ==========================================
+   BUTTONS
+   ========================================== */
 .button-secondary {
     background: #ffffff;
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     color: var(--text-primary);
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: all 0.15s;
     cursor: pointer;
 }
 
@@ -585,13 +673,12 @@ body.wp-admin #adminmenuwrap {
     background: var(--bg-secondary);
     border-color: var(--primary);
     color: var(--primary);
-    transform: translateY(-1px);
 }
 
 .button-link-delete {
     color: var(--danger);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
 }
 
@@ -599,14 +686,16 @@ body.wp-admin #adminmenuwrap {
     color: #dc2626;
 }
 
-/* Modern Notices */
+/* ==========================================
+   NOTICES
+   ========================================== */
 .notice {
     background: #ffffff;
     border-left: 4px solid var(--primary);
-    padding: 18px 24px;
-    margin: 32px 0;
+    padding: 14px 20px;
+    margin: 24px 0;
     box-shadow: var(--shadow);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
 }
 
 .notice-success {
@@ -624,26 +713,27 @@ body.wp-admin #adminmenuwrap {
     background: #fffbeb;
 }
 
-/* Separator */
+/* ==========================================
+   MISCELLANEOUS
+   ========================================== */
 .wp-menu-separator {
     height: 1px;
-    margin: 24px 16px;
-    background: rgba(255, 255, 255, 0.1);
+    margin: 16px 24px;
+    background: var(--border-dark);
 }
 
 .wp-menu-separator .separator {
     display: none;
 }
 
-/* Loading */
 .spinner {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #f3f4f6;
-    border-top: 3px solid var(--primary);
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--primary);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -654,5 +744,349 @@ body.wp-admin #adminmenuwrap {
 .wp-header-end {
     border: none;
     border-bottom: 1px solid var(--border);
-    margin: 0 0 32px 0;
+    margin: 0 0 24px 0;
+}
+
+/* Error text */
+.error-text {
+    color: var(--danger);
+    font-size: 14px;
+}
+
+/* ==========================================
+   MOBILE MENU TOGGLE
+   ========================================== */
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    padding: 0;
+    margin-right: 12px;
+    transition: all 0.15s;
+}
+
+.mobile-menu-toggle:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary);
+}
+
+.mobile-menu-toggle svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-primary);
+}
+
+/* Mobile overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 960px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+    
+    #wpbody-content {
+        padding: 24px;
+    }
+    
+    #wpadminbar {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    /* Sidebar slides in from left */
+    #adminmenuback {
+        display: none;
+    }
+    
+    #adminmenuwrap {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1002;
+        width: 260px;
+    }
+    
+    #adminmenuwrap.open {
+        transform: translateX(0);
+    }
+    
+    /* Show overlay when menu is open */
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    /* Adjust content */
+    #wpcontent {
+        margin-left: 0;
+    }
+    
+    #wpadminbar {
+        left: 0;
+        padding: 0 16px;
+    }
+    
+    #wpbody-content {
+        padding: 20px 16px;
+    }
+    
+    /* Adjust heading */
+    .wp-heading-inline {
+        font-size: 24px;
+    }
+    
+    /* Stack dashboard widgets */
+    #dashboard-widgets {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.badge-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.badge-warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.badge-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.badge-muted {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/* Filter Bar */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 16px 20px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.filter-bar label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.event-filter-select {
+    min-width: 250px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.event-filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.event-filter-select:hover {
+    border-color: var(--primary-light);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    line-height: 1;
+    padding: 0;
+    transition: color 0.15s;
+}
+
+.modal-close:hover {
+    color: var(--danger);
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-body .contact-info {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.modal-body .contact-info p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.modal-body .contact-info p:last-child {
+    margin-bottom: 0;
+}
+
+.modal-body .message-content h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-body .message-content p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-secondary);
+}
+
+.modal-footer .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+}
+
+.modal-footer .button-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+}
+
+.modal-footer .button-primary:hover {
+    background: var(--primary-dark);
+}
+
+.modal-footer .button:not(.button-primary) {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.modal-footer .button:not(.button-primary):hover {
+    background: var(--bg-secondary);
+}
+
+/* Small buttons for tables */
+.button-small {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+}
+
+.button-link-delete {
+    color: var(--danger) !important;
+    border-color: var(--danger) !important;
+}
+
+.button-link-delete:hover {
+    background: var(--danger) !important;
+    color: white !important;
 }
