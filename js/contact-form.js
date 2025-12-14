@@ -1,6 +1,5 @@
 // Contact Form Firebase Integration
-import { db } from './firebase-config.js';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { db, collection, addDoc, Timestamp } from './firebase-config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Find the contact form

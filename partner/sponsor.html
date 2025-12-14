@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Sponsor - AITS Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Krona+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/partner-form.css">
+</head>
+<body data-partner-type="sponsor">
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-logo">AITS</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/events/">Events</a></li>
+                    <li><a href="/about-us/">About</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="partner-hero">
+        <span class="partner-type-badge">Sponsorship</span>
+        <h1>Become a Sponsor</h1>
+        <p>Partner with AITS and showcase your brand to industry leaders, manufacturers, and innovators across Africa.</p>
+    </section>
+
+    <main class="partner-content">
+        <div class="form-card">
+            <div id="form-content">
+                <h2>Sponsorship Application</h2>
+                
+                <form id="partner-form">
+                    <h3 class="form-section-title">Event Selection</h3>
+                    
+                    <div class="form-group">
+                        <label for="event-select">Select Event <span class="required">*</span></label>
+                        <select id="event-select" required>
+                            <option value="">Loading events...</option>
+                        </select>
+                    </div>
+
+                    <h3 class="form-section-title">Contact Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="john@company.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+233 XX XXX XXXX">
+                    </div>
+
+                    <h3 class="form-section-title">Organization Details</h3>
+
+                    <div class="form-group">
+                        <label for="organization">Organization/Company <span class="required">*</span></label>
+                        <input type="text" id="organization" name="organization" required placeholder="Company Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Your Position</label>
+                        <input type="text" id="position" name="position" placeholder="Marketing Director">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Company Website</label>
+                        <input type="text" id="website" name="website" placeholder="company.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company-description">Company Description</label>
+                        <textarea id="company-description" name="company-description" placeholder="Tell us about your company and what you do..."></textarea>
+                    </div>
+
+                    <h3 class="form-section-title">Sponsorship Details</h3>
+
+                    <div class="form-group">
+                        <label for="sponsorship-level">Preferred Sponsorship Level</label>
+                        <select id="sponsorship-level" name="sponsorship-level">
+                            <option value="">Select a level...</option>
+                            <option value="platinum">Platinum Sponsor</option>
+                            <option value="gold">Gold Sponsor</option>
+                            <option value="silver">Silver Sponsor</option>
+                            <option value="bronze">Bronze Sponsor</option>
+                            <option value="custom">Custom Package</option>
+                        </select>
+                        <p class="hint">Our team will contact you with detailed sponsorship packages and benefits.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Additional Message</label>
+                        <textarea id="message" name="message" placeholder="Any specific requirements or questions about sponsorship..."></textarea>
+                    </div>
+
+                    <h3 class="form-section-title">Company Bio/Profile</h3>
+
+                    <div class="form-group">
+                        <label>Upload Company Profile (PDF, Word, or Image)</label>
+                        <div class="file-upload-area" id="bio-upload-area">
+                            <input type="file" id="bio-file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p class="upload-text"><strong>Click to upload</strong> or drag and drop<br>PDF, Word, or Image (max 5MB)</p>
+                        </div>
+                        <div class="file-preview" id="file-preview">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="file-name" id="file-name"></span>
+                            <button type="button" class="remove-file" id="remove-file">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                        Submit Application
+                    </button>
+                </form>
+            </div>
+
+            <div class="success-message" id="success-message">
+                <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="16 8 10 14 8 12"></polyline>
+                </svg>
+                <h3>Application Submitted!</h3>
+                <p>Thank you for your interest in sponsoring AITS. Our team will review your application and contact you within 2-3 business days.</p>
+                <a href="/" class="back-btn">Back to Home</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 AITS Events. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="../js/partner-form.js"></script>
+</body>
+</html>
+

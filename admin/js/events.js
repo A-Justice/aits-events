@@ -1,8 +1,5 @@
 // Events Management
-import { auth, db, storage } from '../../js/firebase-config.js';
-import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, query, orderBy, Timestamp } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
-import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db, storage, collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, query, orderBy, Timestamp, onAuthStateChanged, ref, uploadBytesResumable, getDownloadURL, deleteObject } from '../../js/firebase-config.js';
 import { logout } from './admin-auth.js';
 
 let currentEventId = null;

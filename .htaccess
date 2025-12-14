@@ -1,0 +1,59 @@
+# AITS Events - Apache Configuration
+
+# Enable CORS for Firebase
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+# Set correct MIME type for JavaScript modules
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/javascript .mjs
+</IfModule>
+
+# Directory index
+DirectoryIndex index.html
+
+# Redirect directories to index.html
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # If requesting a directory, serve its index.html
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteCond %{REQUEST_FILENAME}/index.html -f
+    RewriteRule ^(.*)$ $1/index.html [L]
+</IfModule>
+
+# Enable Gzip compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^(package\.json|package-lock\.json|vite\.config\.js|\.env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+

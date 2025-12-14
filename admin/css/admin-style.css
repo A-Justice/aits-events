@@ -319,6 +319,18 @@ body.login {
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
 }
 
+/* Navigation Section Title */
+.nav-section-title {
+    padding: 15px 20px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dark-muted);
+    margin-top: 10px;
+    border-top: 1px solid var(--border-dark);
+}
+
 /* ==========================================
    TOP BAR
    ========================================== */
@@ -943,18 +955,24 @@ body.wp-admin #adminmenuwrap {
 }
 
 /* Modal Styles */
-.modal {
+.modal,
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10000;
     padding: 20px;
+    display: none;
+}
+
+.modal.active,
+.modal-overlay.active {
+    display: flex;
 }
 
 .modal-content {
@@ -1084,6 +1102,107 @@ body.wp-admin #adminmenuwrap {
 .button-link-delete {
     color: var(--danger) !important;
     border-color: var(--danger) !important;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.approved {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-badge.new {
+    background-color: var(--primary);
+    color: white;
+}
+
+.status-badge.read {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.status-badge.replied {
+    background-color: var(--success);
+    color: white;
+}
+
+/* View/Delete buttons in tables */
+.button-view,
+.button-delete {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid;
+    transition: all 0.15s;
+    margin-right: 5px;
+}
+
+.button-view {
+    background: var(--bg-secondary);
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.button-view:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.button-delete {
+    background: transparent;
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.button-delete:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* Contact detail items */
+.contact-detail-item {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.contact-detail-item strong {
+    min-width: 120px;
+    color: var(--text-secondary);
+}
+
+.contact-detail-item span {
+    color: var(--text-primary);
+}
+
+.contact-detail-item a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.contact-detail-item a:hover {
+    text-decoration: underline;
 }
 
 .button-link-delete:hover {

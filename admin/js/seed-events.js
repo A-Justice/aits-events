@@ -1,6 +1,5 @@
 // Seed Past Events to Firebase
-import { db } from '../../js/firebase-config.js';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { db, collection, addDoc, Timestamp } from '../../js/firebase-config.js';
 
 // Past events data from the screenshots
 const pastEvents = [

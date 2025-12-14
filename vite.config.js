@@ -1,9 +1,36 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+// Function to find all HTML files recursively
+function findHtmlFiles(dir, basePath = '') {
+  const entries = {};
+  const items = readdirSync(dir);
+  
+  for (const item of items) {
+    const fullPath = resolve(dir, item);
+    const relativePath = basePath ? `${basePath}/${item}` : item;
+    
+    // Skip node_modules, dist, and hidden directories
+    if (item === 'node_modules' || item === 'dist' || item.startsWith('.') || item === '_original_reference') {
+      continue;
+    }
+    
+    if (statSync(fullPath).isDirectory()) {
+      Object.assign(entries, findHtmlFiles(fullPath, relativePath));
+    } else if (item.endsWith('.html')) {
+      const name = relativePath.replace(/\//g, '_').replace('.html', '');
+      entries[name] = fullPath;
+    }
+  }
+  
+  return entries;
+}
+
+const htmlInputs = findHtmlFiles(__dirname);
 
 export default defineConfig({
   server: {
@@ -55,17 +82,12 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        events: resolve(__dirname, 'events/index.html'),
-        admin: resolve(__dirname, 'admin/index.html'),
-        dashboard: resolve(__dirname, 'admin/dashboard.html'),
-        eventsAdmin: resolve(__dirname, 'admin/events.html'),
-        bookings: resolve(__dirname, 'admin/bookings.html'),
-        eventDetail: resolve(__dirname, 'events/event-detail.html')
-      }
-    }
+      input: htmlInputs
+    },
+    // Copy all assets
+    copyPublicDir: true,
+    // Ensure assets are in a predictable location
+    assetsDir: 'assets'
   },
   appType: 'mpa' // Multi-Page Application mode
 });
-

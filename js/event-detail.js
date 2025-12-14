@@ -1,6 +1,5 @@
 // Event Detail and Booking
-import { db } from './firebase-config.js';
-import { doc, getDoc, collection, addDoc, Timestamp } from 'firebase/firestore';
+import { db, doc, getDoc, collection, addDoc, Timestamp } from './firebase-config.js';
 
 // Get event ID from URL
 const urlParams = new URLSearchParams(window.location.search);

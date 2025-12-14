@@ -1,6 +1,5 @@
 // Public Events Page - Fetch from Firebase
-import { db } from './firebase-config.js';
-import { collection, getDocs, query, orderBy, where, Timestamp } from 'firebase/firestore';
+import { db, collection, getDocs, query, orderBy, where, Timestamp } from './firebase-config.js';
 
 // Load events on page load
 document.addEventListener('DOMContentLoaded', async () => {

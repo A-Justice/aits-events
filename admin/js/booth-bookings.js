@@ -1,7 +1,5 @@
 // Booth Bookings Admin
-import { auth, db } from '../../js/firebase-config.js';
-import { collection, getDocs, doc, updateDoc, query, orderBy, Timestamp } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db, collection, getDocs, doc, updateDoc, query, orderBy, Timestamp, onAuthStateChanged } from '../../js/firebase-config.js';
 import { logout } from './admin-auth.js';
 
 let allBoothBookings = [];

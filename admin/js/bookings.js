@@ -1,7 +1,5 @@
 // Bookings Management
-import { auth, db } from '../../js/firebase-config.js';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db, collection, getDocs, query, orderBy, onAuthStateChanged } from '../../js/firebase-config.js';
 import { logout } from './admin-auth.js';
 
 let allBookings = [];

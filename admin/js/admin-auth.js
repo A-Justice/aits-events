@@ -1,6 +1,5 @@
 // Admin Authentication
-import { auth } from '../../js/firebase-config.js';
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { auth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from '../../js/firebase-config.js';
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', () => {
